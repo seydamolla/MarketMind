@@ -3,6 +3,7 @@ import plotly.graph_objects as go
 from datetime import datetime
 from src.fetcher import get_crypto_price, get_crypto_history, get_stock_price, get_stock_history
 from src.analyzer import analyze_crypto
+from src.predictor import predict_tomorrow
 
 st.set_page_config(
     page_title="MarketMind",
@@ -72,6 +73,18 @@ with tab1:
             st.markdown("### 🤖 AI Analizi")
             st.info(analysis)
 
+            with st.spinner("🔮 Yarın tahmini yapılıyor..."):
+                prediction = predict_tomorrow(
+                    data["symbol"],
+                    history,
+                    data["price"],
+                    data["change_24h"]
+                )
+            
+            if prediction:
+                st.markdown("### 🔮 Yarın Tahmini")
+                st.warning(prediction)
+
 # --- HİSSE SEKMESİ ---
 with tab2:
     st.markdown("**Örnek semboller:** POLTK.IS, THYAO.IS, GARAN.IS, ASELS.IS")
@@ -129,3 +142,15 @@ with tab2:
             
             st.markdown("### 🤖 AI Analizi")
             st.info(analysis)
+
+            with st.spinner("🔮 Yarın tahmini yapılıyor..."):
+                prediction = predict_tomorrow(
+                    data["symbol"],
+                    history,
+                    data["price"],
+                    data["change_24h"]
+                )
+            
+            if prediction:
+                st.markdown("### 🔮 Yarın Tahmini")
+                st.warning(prediction)
