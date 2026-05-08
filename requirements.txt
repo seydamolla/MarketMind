@@ -4,3 +4,4 @@ groq
 rich
 streamlit
 plotly
+yfinance
